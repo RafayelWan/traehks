@@ -118,10 +118,10 @@ export default function Home() {
           <p className="text-gray-600 text-lg font-light">帮助你更清晰地理解和分析问题</p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-10 gap-8">
           {/* 左侧：问题上下文面板 */}
-          <div className="lg:col-span-1">
-            <div className="glass-card sticky top-8">
+          <div className="lg:col-span-3.5">
+            <div className="glass-card h-full">
               <div className="mb-6">
                 <h2 className="text-xl font-medium text-gray-600 mb-4">你的问题</h2>
                 <textarea
@@ -145,42 +145,44 @@ export default function Home() {
           </div>
           
           {/* 右侧：分析结果区域 */}
-          <div className="lg:col-span-2">
-            <div ref={resultsContainerRef} className="space-y-6">
-              {results.surfaceProblem && (
-                <div ref={surfaceProblemRef} className="glass-card animate-fade-in">
-                  <h3 className="text-lg font-medium text-gray-600 mb-4">表层问题</h3>
-                  <p className="text-gray-600">{results.surfaceProblem}</p>
-                </div>
-              )}
-              
-              {results.hiddenAssumption && (
-                <div ref={hiddenAssumptionRef} className="glass-card animate-fade-in">
-                  <h3 className="text-lg font-medium text-gray-600 mb-4">隐含假设</h3>
-                  <p className="text-gray-600">{results.hiddenAssumption}</p>
-                </div>
-              )}
-              
-              {results.missingInfo && (
-                <div ref={missingInfoRef} className="glass-card animate-fade-in">
-                  <h3 className="text-lg font-medium text-gray-600 mb-4">信息缺失</h3>
-                  <p className="text-gray-600">{results.missingInfo}</p>
-                </div>
-              )}
-              
-              {results.cognitiveBlindspot && (
-                <div ref={cognitiveBlindspotRef} className="glass-card animate-fade-in">
-                  <h3 className="text-lg font-medium text-gray-600 mb-4">认知盲点</h3>
-                  <p className="text-gray-600">{results.cognitiveBlindspot}</p>
-                </div>
-              )}
-              
-              {results.suggestion && (
-                <div ref={suggestionRef} className="glass-card animate-fade-in">
-                  <h3 className="text-lg font-medium text-gray-600 mb-4">建议</h3>
-                  <p className="text-gray-600">{results.suggestion}</p>
-                </div>
-              )}
+          <div className="lg:col-span-6.5">
+            <div className="h-[calc(100vh-240px)] overflow-y-auto pr-2">
+              <div ref={resultsContainerRef} className="space-y-6">
+                {results.surfaceProblem && (
+                  <div ref={surfaceProblemRef} className="glass-card animate-fade-in">
+                    <h3 className="text-lg font-medium text-gray-600 mb-4">表层问题</h3>
+                    <p className="text-gray-600">{results.surfaceProblem}</p>
+                  </div>
+                )}
+                
+                {results.hiddenAssumption && (
+                  <div ref={hiddenAssumptionRef} className="glass-card animate-fade-in">
+                    <h3 className="text-lg font-medium text-gray-600 mb-4">隐含假设</h3>
+                    <p className="text-gray-600">{results.hiddenAssumption}</p>
+                  </div>
+                )}
+                
+                {results.missingInfo && (
+                  <div ref={missingInfoRef} className="glass-card animate-fade-in">
+                    <h3 className="text-lg font-medium text-gray-600 mb-4">信息缺失</h3>
+                    <p className="text-gray-600">{results.missingInfo}</p>
+                  </div>
+                )}
+                
+                {results.cognitiveBlindspot && (
+                  <div ref={cognitiveBlindspotRef} className="glass-card animate-fade-in">
+                    <h3 className="text-lg font-medium text-gray-600 mb-4">认知盲点</h3>
+                    <p className="text-gray-600">{results.cognitiveBlindspot}</p>
+                  </div>
+                )}
+                
+                {results.suggestion && (
+                  <div ref={suggestionRef} className="glass-card animate-fade-in">
+                    <h3 className="text-lg font-medium text-gray-600 mb-4">建议</h3>
+                    <p className="text-gray-600">{results.suggestion}</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
