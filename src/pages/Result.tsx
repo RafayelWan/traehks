@@ -14,43 +14,42 @@ export default function Result() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
-      <div className="w-full max-w-3xl">
-        <h1 className="text-4xl font-bold text-center text-blue-600 mb-8">分析结果</h1>
-        
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">您的问题：</h2>
-          <p className="text-gray-700 bg-gray-50 p-4 rounded-md">{question || "无输入问题"}</p>
+    <div className="min-h-screen bg-gray-50 py-12 px-4">
+      <div className="w-full max-w-4xl mx-auto">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-3">分析结果</h1>
+          <p className="text-gray-600 text-lg">问题认知深度分析</p>
         </div>
         
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">分析结果区域</h2>
+        <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">您的问题：</h2>
+          <p className="text-gray-700 bg-gray-50 p-4 rounded-lg">{question || "无输入问题"}</p>
+        </div>
+        
+        <div className="space-y-6">
+          <div className="bg-white rounded-xl shadow-sm p-6">
+            <h3 className="text-lg font-bold text-gray-800 mb-3">表层问题</h3>
+            <p className="text-gray-700">{analysisResult.surfaceProblem}</p>
+          </div>
           
-          <div className="space-y-4">
-            <div className="border-l-4 border-blue-500 pl-4">
-              <h3 className="font-medium text-gray-800">表层问题：</h3>
-              <p className="text-gray-700">{analysisResult.surfaceProblem}</p>
-            </div>
-            
-            <div className="border-l-4 border-green-500 pl-4">
-              <h3 className="font-medium text-gray-800">隐含假设：</h3>
-              <p className="text-gray-700">{analysisResult.hiddenAssumption}</p>
-            </div>
-            
-            <div className="border-l-4 border-yellow-500 pl-4">
-              <h3 className="font-medium text-gray-800">信息缺失：</h3>
-              <p className="text-gray-700">{analysisResult.missingInfo}</p>
-            </div>
-            
-            <div className="border-l-4 border-red-500 pl-4">
-              <h3 className="font-medium text-gray-800">认知盲点：</h3>
-              <p className="text-gray-700">{analysisResult.cognitiveBlindspot}</p>
-            </div>
-            
-            <div className="border-l-4 border-purple-500 pl-4">
-              <h3 className="font-medium text-gray-800">建议：</h3>
-              <p className="text-gray-700">{analysisResult.suggestion}</p>
-            </div>
+          <div className="bg-white rounded-xl shadow-sm p-6">
+            <h3 className="text-lg font-bold text-gray-800 mb-3">隐含假设</h3>
+            <p className="text-gray-700">{analysisResult.hiddenAssumption}</p>
+          </div>
+          
+          <div className="bg-white rounded-xl shadow-sm p-6">
+            <h3 className="text-lg font-bold text-gray-800 mb-3">信息缺失</h3>
+            <p className="text-gray-700">{analysisResult.missingInfo}</p>
+          </div>
+          
+          <div className="bg-white rounded-xl shadow-sm p-6">
+            <h3 className="text-lg font-bold text-gray-800 mb-3">认知盲点</h3>
+            <p className="text-gray-700">{analysisResult.cognitiveBlindspot}</p>
+          </div>
+          
+          <div className="bg-white rounded-xl shadow-sm p-6">
+            <h3 className="text-lg font-bold text-gray-800 mb-3">建议</h3>
+            <p className="text-gray-700">{analysisResult.suggestion}</p>
           </div>
         </div>
       </div>
