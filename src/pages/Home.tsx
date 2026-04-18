@@ -19,7 +19,7 @@ export default function Home() {
           <p className="text-gray-600 text-lg">深入分析问题，发现认知盲点</p>
         </div>
         
-        <div className="bg-white rounded-xl shadow-sm p-8">
+        <div className="glass-card p-8">
           <div className="mb-8">
             <label htmlFor="question" className="block text-gray-700 font-medium mb-3">请输入您的问题：</label>
             <textarea
