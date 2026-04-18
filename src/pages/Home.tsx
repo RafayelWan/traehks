@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Home() {
   const [question, setQuestion] = useState("");
@@ -10,6 +10,54 @@ export default function Home() {
     cognitiveBlindspot: null,
     suggestion: null
   });
+
+  // 创建每个结果卡片的 ref
+  const surfaceProblemRef = useRef<HTMLDivElement>(null);
+  const hiddenAssumptionRef = useRef<HTMLDivElement>(null);
+  const missingInfoRef = useRef<HTMLDivElement>(null);
+  const cognitiveBlindspotRef = useRef<HTMLDivElement>(null);
+  const suggestionRef = useRef<HTMLDivElement>(null);
+
+  // 监听结果变化，自动滚动到最新内容
+  useEffect(() => {
+    if (results.surfaceProblem) {
+      setTimeout(() => {
+        surfaceProblemRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+  }, [results.surfaceProblem]);
+
+  useEffect(() => {
+    if (results.hiddenAssumption) {
+      setTimeout(() => {
+        hiddenAssumptionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+  }, [results.hiddenAssumption]);
+
+  useEffect(() => {
+    if (results.missingInfo) {
+      setTimeout(() => {
+        missingInfoRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+  }, [results.missingInfo]);
+
+  useEffect(() => {
+    if (results.cognitiveBlindspot) {
+      setTimeout(() => {
+        cognitiveBlindspotRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+  }, [results.cognitiveBlindspot]);
+
+  useEffect(() => {
+    if (results.suggestion) {
+      setTimeout(() => {
+        suggestionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+  }, [results.suggestion]);
 
   const handleAnalyze = () => {
     if (question.trim()) {
@@ -93,35 +141,35 @@ export default function Home() {
         
         <div className="space-y-6">
           {results.surfaceProblem && (
-            <div className="glass-card animate-fade-in">
+            <div ref={surfaceProblemRef} className="glass-card animate-fade-in">
               <h3 className="text-lg font-medium text-gray-600 mb-4">表层问题</h3>
               <p className="text-gray-600">{results.surfaceProblem}</p>
             </div>
           )}
           
           {results.hiddenAssumption && (
-            <div className="glass-card animate-fade-in">
+            <div ref={hiddenAssumptionRef} className="glass-card animate-fade-in">
               <h3 className="text-lg font-medium text-gray-600 mb-4">隐含假设</h3>
               <p className="text-gray-600">{results.hiddenAssumption}</p>
             </div>
           )}
           
           {results.missingInfo && (
-            <div className="glass-card animate-fade-in">
+            <div ref={missingInfoRef} className="glass-card animate-fade-in">
               <h3 className="text-lg font-medium text-gray-600 mb-4">信息缺失</h3>
               <p className="text-gray-600">{results.missingInfo}</p>
             </div>
           )}
           
           {results.cognitiveBlindspot && (
-            <div className="glass-card animate-fade-in">
+            <div ref={cognitiveBlindspotRef} className="glass-card animate-fade-in">
               <h3 className="text-lg font-medium text-gray-600 mb-4">认知盲点</h3>
               <p className="text-gray-600">{results.cognitiveBlindspot}</p>
             </div>
           )}
           
           {results.suggestion && (
-            <div className="glass-card animate-fade-in">
+            <div ref={suggestionRef} className="glass-card animate-fade-in">
               <h3 className="text-lg font-medium text-gray-600 mb-4">建议</h3>
               <p className="text-gray-600">{results.suggestion}</p>
             </div>
