@@ -17,39 +17,39 @@ export default function Result() {
     <div className="min-h-screen py-16 px-6">
       <div className="w-full max-w-4xl mx-auto">
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">分析结果</h1>
-          <p className="text-gray-600 text-lg">问题认知深度分析</p>
+          <h1 className="text-5xl font-medium text-gray-700 mb-4">分析结果</h1>
+          <p className="text-gray-500 text-lg">问题认知深度分析</p>
         </div>
         
-        <div className="glass-card p-8 mb-12">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">您的问题：</h2>
-          <p className="text-gray-700 p-5 rounded-lg bg-white bg-opacity-70">{question || "无输入问题"}</p>
+        <div className="glass-card mb-12">
+          <h2 className="text-xl font-medium text-gray-600 mb-4">您的问题：</h2>
+          <p className="text-gray-600 p-5 rounded-lg bg-white bg-opacity-60">{question || "无输入问题"}</p>
         </div>
         
         <div className="space-y-8">
-          <div className="glass-card p-8">
-            <h3 className="text-lg font-bold text-gray-800 mb-4">表层问题</h3>
-            <p className="text-gray-700">{analysisResult.surfaceProblem}</p>
+          <div className="glass-card">
+            <h3 className="text-lg font-medium text-gray-600 mb-4">表层问题</h3>
+            <p className="text-gray-600">{analysisResult.surfaceProblem}</p>
           </div>
           
-          <div className="glass-card p-8">
-            <h3 className="text-lg font-bold text-gray-800 mb-4">隐含假设</h3>
-            <p className="text-gray-700">{analysisResult.hiddenAssumption}</p>
+          <div className="glass-card">
+            <h3 className="text-lg font-medium text-gray-600 mb-4">隐含假设</h3>
+            <p className="text-gray-600">{analysisResult.hiddenAssumption}</p>
           </div>
           
-          <div className="glass-card p-8">
-            <h3 className="text-lg font-bold text-gray-800 mb-4">信息缺失</h3>
-            <p className="text-gray-700">{analysisResult.missingInfo}</p>
+          <div className="glass-card">
+            <h3 className="text-lg font-medium text-gray-600 mb-4">信息缺失</h3>
+            <p className="text-gray-600">{analysisResult.missingInfo}</p>
           </div>
           
-          <div className="glass-card p-8">
-            <h3 className="text-lg font-bold text-gray-800 mb-4">认知盲点</h3>
-            <p className="text-gray-700">{analysisResult.cognitiveBlindspot}</p>
+          <div className="glass-card">
+            <h3 className="text-lg font-medium text-gray-600 mb-4">认知盲点</h3>
+            <p className="text-gray-600">{analysisResult.cognitiveBlindspot}</p>
           </div>
           
-          <div className="glass-card p-8">
-            <h3 className="text-lg font-bold text-gray-800 mb-4">建议</h3>
-            <p className="text-gray-700">{analysisResult.suggestion}</p>
+          <div className="glass-card">
+            <h3 className="text-lg font-medium text-gray-600 mb-4">建议</h3>
+            <p className="text-gray-600">{analysisResult.suggestion}</p>
           </div>
         </div>
       </div>
