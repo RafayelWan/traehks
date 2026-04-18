@@ -1,6 +1,46 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 
+// AI 调用函数
+const callAI = async (question: string): Promise<{
+  surfaceProblem: string;
+  hiddenAssumption: string;
+  missingInfo: string;
+  cognitiveBlindspot: string;
+  suggestion: string;
+}> => {
+  // 分析指令
+  const prompt = `你是 Mind Lens，一个问题分析AI，请严格按以下结构输出：
+
+1. 表层问题
+2. 隐含假设
+3. 信息缺失
+4. 认知盲点
+5. 建议
+
+要求：
+- 简洁
+- 分点输出
+- 每项2-4行
+- 不要输出多余内容
+
+问题：${question}`;
+
+  // 模拟 AI 调用（实际项目中可以替换为真实的 AI API 调用）
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      // 模拟 AI 返回结果
+      resolve({
+        surfaceProblem: "这是一个关于如何提高团队效率的问题，用户希望找到有效的方法来提升团队的工作表现和产出。",
+        hiddenAssumption: "假设团队成员都有相同的工作节奏和能力水平，忽略了个体差异。同时假设所有团队效率问题都可以通过单一方法解决。",
+        missingInfo: "缺少具体的团队规模、当前工作流程和面临的具体挑战等信息。没有提及团队的行业背景、现有工具使用情况以及团队成员的技能水平。",
+        cognitiveBlindspot: "可能忽略了团队成员的个性化需求和工作风格差异，以及团队文化对效率的影响。",
+        suggestion: "建议先进行团队成员访谈，了解具体痛点，然后制定个性化的改进方案。可以引入项目管理工具，建立清晰的目标和任务分配机制，并定期进行团队建设活动。"
+      });
+    }, 1500);
+  });
+};
+
 export default function Result() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -12,6 +52,7 @@ export default function Result() {
     cognitiveBlindspot: null,
     suggestion: null
   });
+  const [isLoading, setIsLoading] = useState(true);
 
   // 创建每个结果卡片的 ref
   const surfaceProblemRef = useRef<HTMLDivElement>(null);
@@ -20,48 +61,61 @@ export default function Result() {
   const cognitiveBlindspotRef = useRef<HTMLDivElement>(null);
   const suggestionRef = useRef<HTMLDivElement>(null);
 
-  // 模拟渐进式生成结果
+  // 调用 AI 生成分析结果
   useEffect(() => {
-    // 表层问题（先出现）
-    setTimeout(() => {
-      setResults(prev => ({
-        ...prev,
-        surfaceProblem: "示例内容：这是一个关于如何提高团队效率的问题"
-      }));
-    }, 300);
+    const generateResults = async () => {
+      try {
+        setIsLoading(true);
+        const aiResults = await callAI(question);
+        
+        // 渐进式显示结果
+        setTimeout(() => {
+          setResults(prev => ({
+            ...prev,
+            surfaceProblem: aiResults.surfaceProblem
+          }));
+        }, 300);
 
-    // 隐含假设（延迟出现）
-    setTimeout(() => {
-      setResults(prev => ({
-        ...prev,
-        hiddenAssumption: "示例内容：假设团队成员都有相同的工作节奏和能力水平"
-      }));
-    }, 1300);
+        setTimeout(() => {
+          setResults(prev => ({
+            ...prev,
+            hiddenAssumption: aiResults.hiddenAssumption
+          }));
+        }, 1300);
 
-    // 信息缺失
-    setTimeout(() => {
-      setResults(prev => ({
-        ...prev,
-        missingInfo: "示例内容：缺少具体的团队规模、当前工作流程和面临的具体挑战等信息"
-      }));
-    }, 2300);
+        setTimeout(() => {
+          setResults(prev => ({
+            ...prev,
+            missingInfo: aiResults.missingInfo
+          }));
+        }, 2300);
 
-    // 认知盲点
-    setTimeout(() => {
-      setResults(prev => ({
-        ...prev,
-        cognitiveBlindspot: "示例内容：可能忽略了团队成员的个性化需求和工作风格差异"
-      }));
-    }, 3300);
+        setTimeout(() => {
+          setResults(prev => ({
+            ...prev,
+            cognitiveBlindspot: aiResults.cognitiveBlindspot
+          }));
+        }, 3300);
 
-    // 建议（最后出现）
-    setTimeout(() => {
-      setResults(prev => ({
-        ...prev,
-        suggestion: "示例内容：建议先进行团队成员访谈，了解具体痛点，然后制定个性化的改进方案"
-      }));
-    }, 4300);
-  }, []);
+        setTimeout(() => {
+          setResults(prev => ({
+            ...prev,
+            suggestion: aiResults.suggestion
+          }));
+          setIsLoading(false);
+        }, 4300);
+      } catch (error) {
+        console.error("AI 调用失败:", error);
+        setIsLoading(false);
+      }
+    };
+
+    if (question) {
+      generateResults();
+    } else {
+      setIsLoading(false);
+    }
+  }, [question]);
 
   // 监听结果变化，自动滚动到最新内容
   useEffect(() => {
@@ -134,6 +188,12 @@ export default function Result() {
           
           {/* 右侧主内容区 */}
           <div className="w-[65%] overflow-y-auto pr-4">
+            {isLoading && !results.surfaceProblem && (
+              <div className="glass-card p-8 text-center">
+                <p className="text-gray-600">AI 正在分析你的问题...</p>
+              </div>
+            )}
+            
             <div className="space-y-6">
               {results.surfaceProblem && (
                 <div ref={surfaceProblemRef} className="glass-card animate-fade-in">
