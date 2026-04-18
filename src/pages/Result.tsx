@@ -10,32 +10,55 @@ const callAI = async (question: string): Promise<{
   suggestion: string;
 }> => {
   // 分析指令
-  const prompt = `你是 Mind Lens，一个问题分析AI，请严格按以下结构输出：
+  const prompt = `你是 Mind Lens，请分析以下问题：
+${question}
 
+并按结构输出：
 1. 表层问题
 2. 隐含假设
 3. 信息缺失
 4. 认知盲点
-5. 建议
-
-要求：
-- 简洁
-- 分点输出
-- 每项2-4行
-- 不要输出多余内容
-
-问题：${question}`;
+5. 建议`;
 
   // 模拟 AI 调用（实际项目中可以替换为真实的 AI API 调用）
   return new Promise((resolve) => {
     setTimeout(() => {
+      // 根据问题内容生成相关的模拟结果
+      let surfaceProblem, hiddenAssumption, missingInfo, cognitiveBlindspot, suggestion;
+      
+      if (question.includes("团队")) {
+        surfaceProblem = "你希望找到有效的方法来提升团队的工作表现和产出，解决团队效率问题。";
+        hiddenAssumption = "假设团队成员都有相同的工作节奏和能力水平，忽略了个体差异。同时假设所有团队效率问题都可以通过单一方法解决。";
+        missingInfo = "缺少具体的团队规模、当前工作流程和面临的具体挑战等信息。没有提及团队的行业背景、现有工具使用情况以及团队成员的技能水平。";
+        cognitiveBlindspot = "可能忽略了团队成员的个性化需求和工作风格差异，以及团队文化对效率的影响。";
+        suggestion = "建议先进行团队成员访谈，了解具体痛点，然后制定个性化的改进方案。可以引入项目管理工具，建立清晰的目标和任务分配机制，并定期进行团队建设活动。";
+      } else if (question.includes("工作")) {
+        surfaceProblem = "你在工作中遇到了挑战，希望找到解决方案来改善工作状态或解决具体问题。";
+        hiddenAssumption = "假设问题的根源在于外部因素，而可能忽略了自身的工作方式和态度对结果的影响。";
+        missingInfo = "缺少具体的工作内容、行业背景、团队环境以及当前采取的应对措施等信息。";
+        cognitiveBlindspot = "可能忽略了工作与生活的平衡对工作表现的影响，以及个人职业发展与当前工作的匹配度。";
+        suggestion = "建议先梳理工作目标和优先级，制定合理的工作计划。同时关注工作方法的改进，必要时寻求同事或上级的支持。";
+      } else if (question.includes("生活")) {
+        surfaceProblem = "你在生活中遇到了困扰，希望找到方法来改善生活质量或解决具体问题。";
+        hiddenAssumption = "假设问题的解决需要外部条件的改变，而可能忽略了自身心态和行为模式对生活的影响。";
+        missingInfo = "缺少具体的生活场景、个人背景、当前的应对方式以及期望的生活状态等信息。";
+        cognitiveBlindspot = "可能忽略了生活的多样性和阶段性，以及不同生活领域之间的相互影响。";
+        suggestion = "建议先明确生活目标和价值观，然后制定具体的行动计划。同时保持开放的心态，灵活调整应对策略。";
+      } else {
+        surfaceProblem = `你提出了关于"${question.substring(0, 50)}${question.length > 50 ? '...' : ''}"的问题，希望获得深入的分析和建议。`;
+        hiddenAssumption = "假设这个问题有明确的解决方案，而可能忽略了问题的复杂性和多面性。";
+        missingInfo = "缺少具体的背景信息、相关情境以及你已经尝试过的解决方法等信息。";
+        cognitiveBlindspot = "可能忽略了问题的不同角度和潜在的影响因素，以及自身在问题中的角色和责任。";
+        suggestion = "建议先收集更多相关信息，从多个角度分析问题。然后制定具体的行动计划，并在实施过程中根据反馈进行调整。";
+      }
+      
       // 模拟 AI 返回结果
       resolve({
-        surfaceProblem: "这是一个关于如何提高团队效率的问题，用户希望找到有效的方法来提升团队的工作表现和产出。",
-        hiddenAssumption: "假设团队成员都有相同的工作节奏和能力水平，忽略了个体差异。同时假设所有团队效率问题都可以通过单一方法解决。",
-        missingInfo: "缺少具体的团队规模、当前工作流程和面临的具体挑战等信息。没有提及团队的行业背景、现有工具使用情况以及团队成员的技能水平。",
-        cognitiveBlindspot: "可能忽略了团队成员的个性化需求和工作风格差异，以及团队文化对效率的影响。",
-        suggestion: "建议先进行团队成员访谈，了解具体痛点，然后制定个性化的改进方案。可以引入项目管理工具，建立清晰的目标和任务分配机制，并定期进行团队建设活动。"
+        surfaceProblem,
+        hiddenAssumption,
+        missingInfo,
+        cognitiveBlindspot,
+        suggestion
       });
     }, 1500);
   });
