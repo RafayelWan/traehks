@@ -12,16 +12,16 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6 py-16">
+    <div className="min-h-screen flex flex-col items-center justify-center p-6">
       <div className="w-full max-w-2xl">
-        <div className="text-center mb-18">
-          <h1 className="text-5xl font-light text-gray-700 mb-6 leading-tight">思考辅助器</h1>
-          <p className="text-gray-600 text-lg font-light leading-relaxed">帮助你更清晰地理解和分析问题</p>
+        <div className="text-center mb-16">
+          <h1 className="text-5xl font-normal text-gray-700 mb-6">思考辅助器</h1>
+          <p className="text-gray-600 text-lg font-light">帮助你更清晰地理解和分析问题</p>
         </div>
         
         <div className="glass-card">
-          <div className="mb-10">
-            <label htmlFor="question" className="block text-gray-600 font-medium mb-4 text-sm">写下你正在困扰的问题</label>
+          <div className="mb-8">
+            <label htmlFor="question" className="block text-gray-600 font-medium mb-4">写下你正在困扰的问题</label>
             <textarea
               id="question"
               value={question}
@@ -34,7 +34,7 @@ export default function Home() {
           <button
             onClick={handleAnalyze}
             disabled={!question.trim()}
-            className="btn-primary text-lg py-6"
+            className="w-full btn-primary text-lg"
           >
             分析问题
           </button>
