@@ -53,13 +53,14 @@ export default function Home() {
   return (
     <div className="min-h-screen flex relative p-6">
       {/* 历史记录抽屉 */}
-      <div className={`fixed left-0 top-0 h-full bg-white bg-opacity-90 backdrop-blur-sm shadow-lg z-20 transition-transform duration-300 ease-in-out ${isDrawerOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <div className="w-80 h-full flex flex-col border-r border-gray-200">
+      <div className={`fixed left-0 top-0 h-full bg-white bg-opacity-90 backdrop-blur-sm shadow-lg z-20 transition-transform duration-300 ease-in-out ${isDrawerOpen ? 'translate-x-0' : '-translate-x-full'}`} style={{ width: '320px' }}>
+        <div className="h-full flex flex-col border-r border-gray-200">
           <div className="p-6 border-b border-gray-200 flex justify-between items-center">
             <h3 className="text-lg font-medium text-gray-700">历史记录</h3>
             <button 
               onClick={() => setIsDrawerOpen(false)}
-              className="text-gray-500 hover:text-gray-700 transition-colors"
+              className="text-gray-500 hover:text-gray-700 transition-colors focus:outline-none"
+              aria-label="关闭历史记录"
             >
               ✕
             </button>
@@ -90,14 +91,15 @@ export default function Home() {
       {/* 抽屉收起状态的按钮 */}
       <button 
         onClick={() => setIsDrawerOpen(true)}
-        className="fixed left-6 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-90 backdrop-blur-sm shadow-md rounded-full p-3 z-10"
+        className={`fixed left-6 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-90 backdrop-blur-sm shadow-md rounded-full p-3 z-10 transition-opacity duration-300 ${isDrawerOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+        aria-label="打开历史记录"
       >
         ⟵
       </button>
 
       {/* 主输入区域 */}
       <div className="flex-1 flex flex-col items-center justify-center">
-        <div className="w-full max-w-2xl">
+        <div className="w-full max-w-3xl">
           <div className="text-center mb-16">
             <h1 className="text-5xl font-normal text-gray-700 mb-6">Mind Lens</h1>
             <p className="text-gray-600 text-lg font-light">帮助你更清晰地理解和分析问题</p>
