@@ -104,12 +104,6 @@ export default function Result() {
     }
   }, [results.suggestion]);
 
-  // 模拟历史分析记录
-  const [history, setHistory] = useState([
-    { id: 1, question: "如何提高团队的工作效率？", timestamp: new Date(Date.now() - 3600000).toLocaleString() },
-    { id: 2, question: "如何平衡工作和生活？", timestamp: new Date(Date.now() - 7200000).toLocaleString() }
-  ]);
-
   const handleBack = () => {
     navigate("/");
   };
@@ -118,30 +112,23 @@ export default function Result() {
     <div className="min-h-screen py-12 px-6">
       <div className="w-full max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-4xl font-normal text-gray-800">Mind Lens</h1>
+          <h1 className="text-4xl font-normal text-gray-700">分析结果</h1>
           <button
             onClick={handleBack}
-            className="px-6 py-2 text-gray-700 hover:text-gray-900 transition-colors"
+            className="px-6 py-2 text-gray-600 hover:text-gray-800 transition-colors"
           >
-            ← 新问题
+            ← 返回
           </button>
         </div>
         
         <div className="flex gap-8 h-[calc(100vh-120px)]">
           {/* 左侧固定区 */}
           <div className="w-[35%] min-w-[300px] glass-card flex flex-col">
-            <h2 className="text-xl font-medium text-gray-800 mb-4">你的问题：</h2>
-            <p className="text-gray-800 p-5 rounded-lg bg-white bg-opacity-60 flex-grow">{question || "无输入问题"}</p>
+            <h2 className="text-xl font-medium text-gray-600 mb-4">你的问题：</h2>
+            <p className="text-gray-600 p-5 rounded-lg bg-white bg-opacity-60 flex-grow">{question || "无输入问题"}</p>
             <div className="mt-6 pt-6 border-t border-gray-200">
-              <h3 className="text-lg font-medium text-gray-800 mb-4">最近分析</h3>
-              <div className="space-y-4">
-                {history.map((item) => (
-                  <div key={item.id} className="p-4 rounded-lg bg-white bg-opacity-40 hover:bg-opacity-60 transition-colors cursor-pointer">
-                    <p className="text-gray-700 text-sm line-clamp-2">{item.question}</p>
-                    <p className="text-gray-500 text-xs mt-2">{item.timestamp}</p>
-                  </div>
-                ))}
-              </div>
+              <h3 className="text-lg font-medium text-gray-600 mb-4">问题上下文</h3>
+              <p className="text-gray-500 text-sm">此问题由用户于 {new Date().toLocaleString()} 提交，正在进行AI分析。</p>
             </div>
           </div>
           
@@ -150,36 +137,36 @@ export default function Result() {
             <div className="space-y-6">
               {results.surfaceProblem && (
                 <div ref={surfaceProblemRef} className="glass-card animate-fade-in">
-                  <h3 className="text-lg font-medium text-gray-800 mb-4">表层问题</h3>
-                  <p className="text-gray-700">{results.surfaceProblem}</p>
+                  <h3 className="text-lg font-medium text-gray-600 mb-4">表层问题</h3>
+                  <p className="text-gray-600">{results.surfaceProblem}</p>
                 </div>
               )}
               
               {results.hiddenAssumption && (
                 <div ref={hiddenAssumptionRef} className="glass-card animate-fade-in">
-                  <h3 className="text-lg font-medium text-gray-800 mb-4">隐含假设</h3>
-                  <p className="text-gray-700">{results.hiddenAssumption}</p>
+                  <h3 className="text-lg font-medium text-gray-600 mb-4">隐含假设</h3>
+                  <p className="text-gray-600">{results.hiddenAssumption}</p>
                 </div>
               )}
               
               {results.missingInfo && (
                 <div ref={missingInfoRef} className="glass-card animate-fade-in">
-                  <h3 className="text-lg font-medium text-gray-800 mb-4">信息缺失</h3>
-                  <p className="text-gray-700">{results.missingInfo}</p>
+                  <h3 className="text-lg font-medium text-gray-600 mb-4">信息缺失</h3>
+                  <p className="text-gray-600">{results.missingInfo}</p>
                 </div>
               )}
               
               {results.cognitiveBlindspot && (
                 <div ref={cognitiveBlindspotRef} className="glass-card animate-fade-in">
-                  <h3 className="text-lg font-medium text-gray-800 mb-4">认知盲点</h3>
-                  <p className="text-gray-700">{results.cognitiveBlindspot}</p>
+                  <h3 className="text-lg font-medium text-gray-600 mb-4">认知盲点</h3>
+                  <p className="text-gray-600">{results.cognitiveBlindspot}</p>
                 </div>
               )}
               
               {results.suggestion && (
                 <div ref={suggestionRef} className="glass-card animate-fade-in">
-                  <h3 className="text-lg font-medium text-gray-800 mb-4">建议</h3>
-                  <p className="text-gray-700">{results.suggestion}</p>
+                  <h3 className="text-lg font-medium text-gray-600 mb-4">建议</h3>
+                  <p className="text-gray-600">{results.suggestion}</p>
                 </div>
               )}
             </div>

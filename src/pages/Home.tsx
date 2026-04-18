@@ -42,7 +42,7 @@ export default function Home() {
             disabled={!question.trim() || isAnalyzing}
             className="w-full btn-primary text-lg"
           >
-            {isAnalyzing ? "正在理解你的问题..." : "开始分析"}
+            {isAnalyzing ? "分析中..." : "分析问题"}
           </button>
         </div>
       </div>
